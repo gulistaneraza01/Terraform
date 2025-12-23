@@ -5,19 +5,27 @@ terraform {
       version = "~> 6.0"
     }
   }
+
+  backend "s3" {
+    bucket       = "gulistaneraza-terraform-state"
+    key          = "dev/terraform.tfstate"
+    region       = "ap-south-1"
+    encrypt      = true
+    use_lockfile = true
+  }
 }
 
 # Configure the AWS Provider
 provider "aws" {
-  region = "us-east-1"
+  region = "ap-south-1"
 }
 
-# Create an S3 Bucket
-resource "aws_s3_bucket" "react-bucket" {
-  bucket = "react-bucket-raza"
+resource "aws_s3_bucket" "example_bucket" {
+  bucket = "test-raza-oii"
 
   tags = {
-    Name        = "new bucket"
+    Name        = "example bucket"
     Environment = "Dev"
   }
 }
+
