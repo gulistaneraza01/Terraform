@@ -28,3 +28,13 @@ variable "vm" {
     prod = "t3-large"
   }
 }
+
+variable "tags" {
+  type = map(string)
+  default = {
+    Environment = "dev"
+    Owner       = "admin"
+  }
+  description = "A map of tags to assign to resources."
+}
+
