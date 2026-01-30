@@ -6,3 +6,6 @@
 # Terraform variables (often secrets)
 *.tfvars
 *.tfvars.json
+
+# Ignore all PEM files (e.g., private keys)
+*.pem
