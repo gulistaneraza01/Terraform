@@ -65,3 +65,73 @@ resource "aws_internet_gateway" "secondary_igw" {
     Name = "Secondary IGW"
   }
 }
+
+
+resource "aws_route_table" "primary_route_table" {
+  provider = aws.primary
+  vpc_id   = aws_vpc.primary_vpc.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.primary_igw.id
+  }
+
+  tags = {
+    Name = "Primary Route table"
+  }
+}
+
+resource "aws_route_table" "secondary_route_table" {
+  provider = aws.secondary
+  vpc_id   = aws_vpc.secondary_vpc.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.secondary_igw.id
+  }
+
+  tags = {
+    Name = "Secondary Route table"
+  }
+}
+
+
+resource "aws_route_table_association" "primary_route_table_ass" {
+  provider = aws.primary
+
+  subnet_id      = aws_subnet.primary_subnet.id
+  route_table_id = aws_route_table.primary_route_table.id
+}
+
+resource "aws_route_table_association" "secondary_route_table_ass" {
+  provider = aws.secondary
+
+  subnet_id      = aws_subnet.secondary_subnet.id
+  route_table_id = aws_route_table.secondary_route_table.id
+}
+
+resource "aws_vpc_peering_connection" "primary_to_secondary" {
+  provider    = aws.primary
+  peer_vpc_id = aws_vpc.secondary_vpc.id
+  vpc_id      = aws_vpc.primary_vpc.id
+  peer_region = var.secondary_region
+  auto_accept = false
+
+  tags = {
+    Name = "Primary-To-Secondary-Peering"
+  }
+}
+
+
+resource "aws_vpc_peering_connection" "secondary_to_primary" {
+  provider    = aws.secondary
+  peer_vpc_id = aws_vpc.primary_vpc.id
+  vpc_id      = aws_vpc.secondary_vpc.id
+  peer_region = var.primary_region
+  auto_accept = false
+
+  tags = {
+    Name = "Secondary-To-Primary-Peering"
+  }
+}
+
