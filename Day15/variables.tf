@@ -21,3 +21,21 @@ variable "secondary_cidr" {
   type        = string
   default     = "10.1.0.0/16"
 }
+
+variable "instance_type" {
+  description = "Instance type for ec2 machine"
+  type        = string
+  default     = "t2.micro"
+}
+
+variable "primary_key_name" {
+  description = "key pair for SSH primary instance"
+  type        = string
+  default     = ""
+}
+
+variable "secondary_key_name" {
+  description = "key pair for SSH secondary instance"
+  type        = string
+  default     = ""
+}
