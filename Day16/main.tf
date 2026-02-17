@@ -46,4 +46,5 @@ resource "aws_iam_user_group_membership" "sales_membership" {
 
   user   = each.value.name
   groups = [aws_iam_group.sales_group.name]
+  
 }
