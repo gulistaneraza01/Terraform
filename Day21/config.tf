@@ -1,7 +1,3 @@
-# ------------------------------------------------------------------------------
-# AWS Config Recorder and Delivery Channel
-# ------------------------------------------------------------------------------
-
 # AWS Config Recorder
 resource "aws_config_configuration_recorder" "main" {
   name     = "${var.project_name}-recorder"
@@ -27,9 +23,6 @@ resource "aws_config_configuration_recorder_status" "main" {
   depends_on = [aws_config_delivery_channel.main]
 }
 
-# ------------------------------------------------------------------------------
-# AWS Config Rules - Compliance Checks
-# ------------------------------------------------------------------------------
 
 # Config Rule: Ensure S3 buckets do not allow public write
 resource "aws_config_config_rule" "s3_public_write_prohibited" {
