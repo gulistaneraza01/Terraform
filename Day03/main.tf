@@ -21,3 +21,12 @@ resource "aws_s3_bucket" "react-bucket" {
     Environment = "Dev"
   }
 }
+
+resource "aws_s3_bucket" "react-bucket1" {
+  bucket = "react-bucket-raza-1"
+
+  tags = {
+    Name        = "new bucket"
+    Environment = "Dev"
+  }
+}
