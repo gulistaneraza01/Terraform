@@ -6,14 +6,19 @@ terraform {
     }
   }
 
-  backend "s3" {
-    bucket       = "gulistaneraza-terraform-state"
-    key          = "dev/terraform.tfstate"
-    region       = "ap-south-1"
-    encrypt      = true
-    use_lockfile = true
+  cloud {
+
+    organization = "GulistaneRaza_org"
+
+    workspaces {
+      name = "tf-cli"
+    }
   }
+
+
 }
+
+
 
 # Configure the AWS Provider
 provider "aws" {
