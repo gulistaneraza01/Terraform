@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Environment to destroy'
+        description: "Environment to destroy"
         required: true
-        default: 'dev'
+        default: "dev"
         type: choice
         options:
           - dev
@@ -30,6 +30,7 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: Day27/code
 
     steps:
       - name: Checkout
