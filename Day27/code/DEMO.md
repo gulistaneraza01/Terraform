@@ -238,7 +238,7 @@ Infrastructure Updated
 - Workflow dispatch trigger (manual execution only)
 - Environment selection dropdown
 - Confirmation required: Type "DESTROY" to proceed
-- Protected by GitHub environment approvals
+- Protected by GitHub environment approvals..............
 
 ---
 
