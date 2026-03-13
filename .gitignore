@@ -4,7 +4,7 @@
 *.tfstate.backup
 
 # Terraform variables (often secrets)
-*.tfvars
+# *.tfvars
 *.tfvars.json
 
 # Ignore all PEM files (e.g., private keys)
