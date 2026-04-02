@@ -1,0 +1,341 @@
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: var(--font-mono, monospace);
+  }
+  .tree {
+    padding: 16px 0;
+  }
+  .entry {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    line-height: 1.6;
+  }
+  .prefix {
+    color: var(--color-text-tertiary);
+    white-space: pre;
+    font-size: 13px;
+  }
+  .icon {
+    font-size: 13px;
+    margin-right: 6px;
+    flex-shrink: 0;
+  }
+  .name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+  .name.dir {
+    color: var(--color-text-primary);
+  }
+  .name.tf {
+    color: #185fa5;
+  }
+  .name.tfvars {
+    color: #0f6e56;
+  }
+  .name.hcl {
+    color: #854f0b;
+  }
+  .name.yaml {
+    color: #993c1d;
+  }
+  .name.sh {
+    color: #993556;
+  }
+  .name.lock {
+    color: var(--color-text-tertiary);
+  }
+  .name.git {
+    color: var(--color-text-tertiary);
+  }
+  .name.md {
+    color: var(--color-text-secondary);
+  }
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .b-required {
+    background: #e6f1fb;
+    color: #0c447c;
+  }
+  .b-optional {
+    background: #e1f5ee;
+    color: #085041;
+  }
+  .b-best {
+    background: #faeeda;
+    color: #633806;
+  }
+  .b-secret {
+    background: #fcebeb;
+    color: #791f1f;
+  }
+  .tooltip {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    margin-left: 4px;
+  }
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 16px 0 4px 0;
+    padding-left: 4px;
+  }
+  .divider {
+    height: 1px;
+    background: var(--color-border-tertiary);
+    margin: 10px 0;
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px 0 4px;
+  }
+  .leg {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: var(--color-text-secondary);
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+</style>
+
+<div class="legend">
+  <span class="leg"
+    ><span
+      class="dot"
+      style="background: #e6f1fb; border: 1px solid #185fa5"
+    ></span>
+    Required</span
+  >
+  <span class="leg"
+    ><span
+      class="dot"
+      style="background: #e1f5ee; border: 1px solid #0f6e56"
+    ></span>
+    Recommended</span
+  >
+  <span class="leg"
+    ><span
+      class="dot"
+      style="background: #faeeda; border: 1px solid #854f0b"
+    ></span>
+    Best practice add-on</span
+  >
+  <span class="leg"
+    ><span
+      class="dot"
+      style="background: #fcebeb; border: 1px solid #791f1f"
+    ></span>
+    Never commit</span
+  >
+</div>
+
+<div class="tree">
+  <div class="section-label">root — repository</div>
+  <div class="entry">
+    <span class="prefix"> </span><span class="icon">📁</span
+    ><span class="name dir">my-infra/</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> ├── </span><span class="icon">📁</span
+    ><span class="name dir">modules/</span
+    ><span class="tooltip">— reusable internal modules</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ ├── </span><span class="icon">📁</span
+    ><span class="name dir">networking/</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ │ ├── </span><span class="name tf">main.tf</span
+    ><span class="badge b-required">required</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ │ ├── </span
+    ><span class="name tf">variables.tf</span
+    ><span class="badge b-required">required</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ │ ├── </span><span class="name tf">outputs.tf</span
+    ><span class="badge b-required">required</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ │ └── </span><span class="name md">README.md</span
+    ><span class="badge b-best">best practice</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ ├── </span><span class="icon">📁</span
+    ><span class="name dir">compute/</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ │ ├── </span><span class="name tf">main.tf</span
+    ><span class="badge b-required">required</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ │ ├── </span
+    ><span class="name tf">variables.tf</span
+    ><span class="badge b-required">required</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ │ ├── </span><span class="name tf">outputs.tf</span
+    ><span class="badge b-required">required</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ │ └── </span><span class="name tf">locals.tf</span
+    ><span class="badge b-optional">recommended</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ └── </span><span class="icon">📁</span
+    ><span class="name dir">database/</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ ├── </span><span class="name tf">main.tf</span
+    ><span class="badge b-required">required</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ ├── </span><span class="name tf">variables.tf</span
+    ><span class="badge b-required">required</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ ├── </span><span class="name tf">outputs.tf</span
+    ><span class="badge b-required">required</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ └── </span><span class="name tf">versions.tf</span
+    ><span class="badge b-optional">recommended</span>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-label">environments</div>
+  <div class="entry">
+    <span class="prefix"> ├── </span><span class="icon">📁</span
+    ><span class="name dir">environments/</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ ├── </span><span class="icon">📁</span
+    ><span class="name dir">prod/</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ │ ├── </span><span class="name tf">main.tf</span
+    ><span class="badge b-required">required</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ │ ├── </span
+    ><span class="name tf">variables.tf</span
+    ><span class="badge b-required">required</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ │ ├── </span><span class="name tf">outputs.tf</span
+    ><span class="badge b-required">required</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ │ ├── </span
+    ><span class="name tf">providers.tf</span
+    ><span class="badge b-optional">recommended</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ │ ├── </span><span class="name tf">backend.tf</span
+    ><span class="badge b-required">required</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ │ ├── </span
+    ><span class="name tfvars">prod.tfvars</span
+    ><span class="badge b-required">required</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ │ └── </span
+    ><span class="name tfvars">secrets.tfvars</span
+    ><span class="badge b-secret">never commit</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ ├── </span><span class="icon">📁</span
+    ><span class="name dir">staging/</span
+    ><span class="tooltip">— mirrors prod/</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ └── </span><span class="icon">📁</span
+    ><span class="name dir">dev/</span
+    ><span class="tooltip">— mirrors prod/</span>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-label">global config &amp; ci</div>
+  <div class="entry">
+    <span class="prefix"> ├── </span><span class="name tf">versions.tf</span
+    ><span class="badge b-required">required</span
+    ><span class="tooltip">— provider + tf version constraints</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> ├── </span
+    ><span class="name hcl">.terraform.lock.hcl</span
+    ><span class="badge b-best">best practice</span
+    ><span class="tooltip">— commit this!</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> ├── </span
+    ><span class="name tfvars">.auto.tfvars.example</span
+    ><span class="badge b-best">best practice</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> ├── </span><span class="icon">📁</span
+    ><span class="name dir">.github/workflows/</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ ├── </span
+    ><span class="name yaml">terraform-plan.yml</span
+    ><span class="badge b-best">best practice</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ └── </span
+    ><span class="name yaml">terraform-apply.yml</span
+    ><span class="badge b-best">best practice</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> ├── </span><span class="icon">📁</span
+    ><span class="name dir">scripts/</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ ├── </span><span class="name sh">validate.sh</span
+    ><span class="badge b-best">best practice</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> │ └── </span><span class="name sh">fmt-check.sh</span
+    ><span class="badge b-best">best practice</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> ├── </span><span class="name git">.gitignore</span
+    ><span class="badge b-required">required</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> ├── </span><span class="name md">README.md</span
+    ><span class="badge b-optional">recommended</span>
+  </div>
+  <div class="entry">
+    <span class="prefix"> └── </span
+    ><span class="name yaml">.pre-commit-config.yaml</span
+    ><span class="badge b-best">best practice</span>
+  </div>
+</div>
